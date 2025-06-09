@@ -2,33 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Thank You!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <title>Thank You · echo’s</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Parisienne&family=Quicksand&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #fff0f5;
       font-family: 'Quicksand', sans-serif;
       text-align: center;
-      padding: 100px 20px;
+      padding: 100px 30px;
+      color: #444;
+      position: relative;
+      overflow: hidden;
     }
+
     h1 {
-      font-family: 'Pacifico', cursive;
-      font-size: 3em;
-      color: #ff69b4;
+      font-family: 'Parisienne', cursive;
+      font-size: 4rem;
+      color: #d94f70;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
     }
+
+    h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2rem;
+      color: #a67c52;
+      margin-top: 0.3rem;
+      margin-bottom: 1rem;
+      z-index: 1;
+      position: relative;
+    }
+
     p {
-      font-size: 1.2em;
+      font-size: 1.1rem;
+      margin: 1.2rem 0 2rem;
       color: #555;
+      z-index: 1;
+      position: relative;
     }
-    img {
-      width: 300px;
-      margin-top: 30px;
-      border-radius: 15px;
+
+    .button {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.8rem 1.6rem;
+      font-size: 1rem;
+      background-color: #ff7f9c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
+
+    .button:hover {
+      background-color: #e4607f;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: gold;
+      opacity: 0.8;
+      border-radius: 50%;
+      animation: fall 6s infinite ease-in;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0deg); }
+      100% { transform: translateY(700px) rotate(360deg); opacity: 0; }
+    }
+
+    .confetti:nth-child(1) { left: 5%; background: #ffd700; animation-delay: 0s; }
+    .confetti:nth-child(2) { left: 15%; background: #ff69b4; animation-delay: 0.5s; }
+    .confetti:nth-child(3) { left: 25%; background: #ffa07a; animation-delay: 1s; }
+    .confetti:nth-child(4) { left: 35%; background: #ffb347; animation-delay: 1.5s; }
+    .confetti:nth-child(5) { left: 50%; background: #fdd9e5; animation-delay: 2s; }
+    .confetti:nth-child(6) { left: 60%; background: #ffd700; animation-delay: 2.5s; }
+    .confetti:nth-child(7) { left: 75%; background: #f08080; animation-delay: 3s; }
+    .confetti:nth-child(8) { left: 85%; background: #ff69b4; animation-delay: 3.5s; }
+    .confetti:nth-child(9) { left: 92%; background: #ffdab9; animation-delay: 4s; }
+    .confetti:nth-child(10) { left: 98%; background: #ffc0cb; animation-delay: 4.5s; }
   </style>
 </head>
 <body>
   <h1>Thank You! 🧁</h1>
-  <p>Your order has been placed successfully. We'll serve it fresh and hot!</p>
+  <h2>for ordering at echo’s</h2>
+  <p>Your order has been placed with love. We’ll serve it warm, sweet, and magical – just for you.</p>
+  <a href="https://swatin9.github.io/echo-menu/" class="button">← Back to Menu</a>
+
+  <!-- Confetti -->
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
 </body>
 </html>
