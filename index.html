@@ -2,110 +2,198 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Echo Menu 🍽</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Echo Restaurant · Interactive Menu</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet" />
+
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Quicksand', sans-serif;
-      background: #fffaf4;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
+      font-family: "Playfair Display", serif;
+      background: #f9f6f4;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
     }
-    h1 {
-      font-family: 'Pacifico', cursive;
-      color: #db7093;
-    }
-    .menu-container {
-      max-width: 600px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .question-box {
-      margin-bottom: 20px;
-      background: #f0fff0;
-      padding: 10px;
-      border-radius: 10px;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    img {
-      width: 200px;
-      height: auto;
-      border-radius: 10px;
-      margin: 10px auto;
-    }
-    .button {
-      padding: 10px 20px;
-      background-color: #3399ff;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
+    h1, h2, h3 { font-family: "Great Vibes", cursive; font-weight: 400; }
+    button {
       cursor: pointer;
-      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      padding: 0.8rem 1.4rem;
+      font-size: 1rem;
+      background: #1b8ce5;
+      color: #fff;
+      transition: background 0.2s;
     }
-    .button:hover {
-      background-color: #0077cc;
+    button:hover { background: #1474bf; }
+
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 660px;
+      overflow: hidden;
+    }
+    .section { padding: 2.5rem 2rem; text-align: center; }
+    .hidden { display: none; }
+
+    .menu-hero {
+      background: url("https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&auto=format&q=75") center/cover;
+      color: #fff;
+      padding: 4rem 2rem;
+      border-bottom: 6px solid #f0e6d6;
+    }
+    .menu-hero h1 { font-size: 3.4rem; text-shadow: 0 4px 10px rgba(0,0,0,.28); }
+    .menu-hero h2 { letter-spacing: 4px; margin-top: 0.5rem; font-size: 1.4rem; }
+
+    .menu-list { margin-top: 2rem; text-align: left; line-height: 1.55; }
+    .menu-item { margin-bottom: 1.6rem; }
+    .menu-item h3 { font-size: 1.6rem; margin-bottom: 0.35rem; color: #222; }
+    .menu-item p { font-size: 0.95rem; color: #555; }
+
+    form { margin-top: 1.2rem; text-align: left; }
+    fieldset { border: none; margin: 1.4rem 0 0; }
+    legend { font-weight: 700; margin-bottom: 0.6rem; font-size: 1.05rem; }
+    label { display: block; margin: 0.45rem 0; cursor: pointer; }
+    input[type="radio"], input[type="checkbox"] { margin-right: 0.5rem; }
+    #submitBtn { width: 100%; margin-top: 1.2rem; }
+
+    #quote { font-style: italic; margin-bottom: 1rem; }
+    #triviaWrap {
+      margin-top: 1.5rem;
+      padding: 1rem 1.2rem;
+      background: #fafafa;
+      border: 1px dashed #ccc;
+      border-radius: 10px;
+    }
+    #triviaWrap.success { border-color: #53a653; background: #e9f8e9; }
+    #triviaWrap.fail { border-color: #d9534f; background: #ffecec; }
+
+    .dish-img {
+      width: 120px;
+      border-radius: 10px;
+      margin: 4px 0 4px 28px;
     }
   </style>
 </head>
 <body>
-  <div class="menu-container">
-    <h1>Echo Restaurant 🍜</h1>
-    <p><em>"Life is uncertain. Eat dessert first!" – Ernestine Ulmer</em></p>
+  <div class="card">
+    <section id="menuPage" class="section">
+      <div class="menu-hero">
+        <h1>Echo</h1>
+        <h2>MENU</h2>
+      </div>
 
-    <div class="question-box">
-      <p><strong>Answer this to continue:</strong><br>What color do you get by mixing red and white?</p>
-      <input type="text" id="quizAnswer" placeholder="Type here..." />
-      <button onclick="checkAnswer()" class="button">Check ✅</button>
-      <p id="quizMessage"></p>
-    </div>
+      <div class="menu-list">
+        <div class="menu-item">
+          <h3>Mango Cheesecake</h3>
+          <p>A velvety no‑bake cheesecake balanced with tropical mango, melting in your mouth.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Chocolate Cheesecake</h3>
+          <p>A rich, creamy explosion of chocolate bliss topped with luscious ganache.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Fried Tteokbokki with Pasta Sauce & Cheese</h3>
+          <p>Crispy rice cakes paired with a creamy, cheesy pasta sauce – a fusion for the soul.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Tteokbokki with Makhni Sauce</h3>
+          <p>Soft rice cakes swathed in rich makhni sauce for a comforting yet modern pairing.</p>
+        </div>
+      </div>
 
-    <form id="orderForm" style="display:none;" action="thank-you.html" method="GET">
-      <label>Main Dish</label>
-      <input type="radio" name="main" value="Cheesy Pasta Tteokbokki" required />
-      Cheesy Pasta Tteokbokki<br>
-      <img src="https://images.unsplash.com/photo-1609501674056-e877c5b3d3e4" alt="Cheesy Tteokbokki" />
+      <button id="startBtn" style="background:#fe8a71;color:#fff;margin-top:2.2rem">Start Your Order →</button>
+    </section>
 
-      <input type="radio" name="main" value="Makhni Tteokbokki" />
-      Makhni Tteokbokki<br>
-      <img src="https://images.unsplash.com/photo-1582453470968-793a25ca7b45" alt="Makhni Tteokbokki" />
+    <section id="orderPage" class="section hidden">
+      <p id="quote"></p>
+      <div id="triviaWrap">
+        <h3 style="font-family:'Playfair Display',serif;margin-bottom:.6rem">Answer this to continue:</h3>
+        <p id="triviaQ"></p>
+        <input id="triviaA" type="text" placeholder="Your answer" style="padding:.55rem;width:100%;max-width:280px;margin-top:.55rem" />
+        <button id="checkBtn" style="background:#ffbe76;color:#000;margin-top:.75rem">Check ✅</button>
+        <p id="triviaMsg" style="margin-top:.6rem"></p>
+      </div>
 
-      <label>Add-ons</label>
-      <input type="checkbox" name="addon" value="Extra Cheese" /> Extra Cheese
+      <form id="orderForm" class="hidden" action="thank-you.html" method="GET">
+        <fieldset>
+          <legend>Main Dish</legend>
+          <label><input type="radio" name="main" value="Cheesy Pasta Tteokbokki" required />Cheesy Pasta Tteokbokki</label>
+          <img src="https://images.unsplash.com/photo-1613145992429-942fc68a42e7?w=640&auto=format&q=70" class="dish-img" alt="Cheesy Tteokbokki" />
+          <label><input type="radio" name="main" value="Makhni Tteokbokki" />Makhni Tteokbokki</label>
+          <img src="https://images.unsplash.com/photo-1634417124445-f0e3cf54218f?w=640&auto=format&q=70" class="dish-img" alt="Makhni Tteokbokki" />
+        </fieldset>
 
-      <label>Dessert</label>
-      <input type="radio" name="dessert" value="Mango Cheesecake" required />
-      Mango Cheesecake<br>
-      <img src="https://images.unsplash.com/photo-1612197526444-e02ee8b32792" alt="Mango Cheesecake" />
+        <fieldset>
+          <legend>Add‑ons</legend>
+          <label><input type="checkbox" name="addon" value="Extra Cheese" />Extra Cheese</label>
+        </fieldset>
 
-      <input type="radio" name="dessert" value="Chocolate Cheesecake" />
-      Chocolate Cheesecake<br>
-      <img src="https://images.unsplash.com/photo-1612197672023-7d964bc59c80" alt="Chocolate Cheesecake" />
+        <fieldset>
+          <legend>Dessert</legend>
+          <label><input type="radio" name="dessert" value="Mango Cheesecake" required />Mango Cheesecake</label>
+          <img src="https://images.unsplash.com/photo-1612197526444-e02ee8b32792?w=640&auto=format&q=70" class="dish-img" alt="Mango Cheesecake" />
+          <label><input type="radio" name="dessert" value="Chocolate Cheesecake" />Chocolate Cheesecake</label>
+          <img src="https://images.unsplash.com/photo-1612197672023-7d964bc59c80?w=640&auto=format&q=70" class="dish-img" alt="Chocolate Cheesecake" />
+        </fieldset>
 
-      <button type="submit" class="button">Place Order ✨</button>
-    </form>
+        <button id="submitBtn" type="submit">Place Order ✨</button>
+      </form>
+    </section>
   </div>
 
   <script>
-    function checkAnswer() {
-      const answer = document.getElementById("quizAnswer").value.trim().toLowerCase();
-      const message = document.getElementById("quizMessage");
-      if (answer === "pink") {
-        message.innerHTML = "Great! You can order now 🎉";
-        document.getElementById("orderForm").style.display = "block";
+    const quotes = [
+      '"Life is uncertain. Eat dessert first." – Ernestine Ulmer',
+      '"Food is symbolic of love when words are inadequate." – Alan D. Wolfelt',
+      '"First we eat, then we do everything else." – M.F.K. Fisher',
+      '"The secret ingredient is always cheese." – Anonymous'
+    ];
+
+    const triviaBank = [
+      { q: 'What colour do you get by mixing red and white?', a: 'pink' },
+      { q: 'What planet is known as the Red Planet?', a: 'mars' },
+      { q: '5 ✕ 4 equals?', a: '20' },
+      { q: 'How many days are there in a leap year?', a: '366' }
+    ];
+
+    const quoteEl = document.getElementById('quote');
+    const triviaQ = document.getElementById('triviaQ');
+    const triviaA = document.getElementById('triviaA');
+    const triviaMsg = document.getElementById('triviaMsg');
+    const orderForm = document.getElementById('orderForm');
+
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
+    quoteEl.textContent = quote;
+
+    const current = triviaBank[Math.floor(Math.random() * triviaBank.length)];
+    triviaQ.textContent = current.q;
+
+    document.getElementById('checkBtn').addEventListener('click', () => {
+      if (triviaA.value.trim().toLowerCase() === current.a) {
+        triviaMsg.textContent = 'Correct! You may now place your order.';
+        triviaMsg.style.color = 'green';
+        document.getElementById('triviaWrap').classList.add('success');
+        orderForm.classList.remove('hidden');
       } else {
-        message.innerHTML = "Oops! Try again.";
+        triviaMsg.textContent = 'Oops! That's not quite right. Try again.';
+        triviaMsg.style.color = 'red';
+        document.getElementById('triviaWrap').classList.add('fail');
       }
-    }
+    });
+
+    document.getElementById('startBtn').addEventListener('click', () => {
+      document.getElementById('menuPage').classList.add('hidden');
+      document.getElementById('orderPage').classList.remove('hidden');
+    });
   </script>
 </body>
 </html>
