@@ -1,61 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Thank You!</title>
   <style>
     body {
-      background: #fff6f0;
       font-family: 'Segoe UI', sans-serif;
-      color: #333;
+      background: #fff0f5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .message-box {
       text-align: center;
-      padding: 30px;
+      padding: 2rem;
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
-      color: #e06c9f;
-    }
-
-    .dish-images img {
-      width: 200px;
-      margin: 15px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      color: #d94a67;
+      font-size: 2.2rem;
     }
 
     p {
-      font-size: 1.2em;
+      font-size: 1.2rem;
+      color: #555;
     }
 
-    a {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 10px 20px;
-      background-color: #ff9e9e;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    a:hover {
-      background-color: #f36a6a;
+    img {
+      margin-top: 1rem;
+      width: 300px;
+      border-radius: 12px;
     }
   </style>
 </head>
 <body>
-
-  <h1>🎉 Thank You for Your Order! 🎉</h1>
-  <p>Your food is being magically prepared. You'll love every bite!</p>
-
-  <div class="dish-images">
-    <img src="https://images.unsplash.com/photo-1604917869345-e4cf6c345746" alt="Cheesecake">
-    <img src="https://images.unsplash.com/photo-1613145992429-942fc68a42e7" alt="Tteokbokki">
-    <img src="https://images.unsplash.com/photo-1634417124445-f0e3cf54218f" alt="Makhani">
+  <div class="message-box">
+    <h1>Thank You! 🎉</h1>
+    <p>Your order is on the way. We hope you’re as excited as we are!</p>
+    <img src="https://i.imgur.com/XzICeUm.png" alt="Thank you image" />
   </div>
-
-  <a href="index.html">Back to Menu</a>
-
 </body>
 </html>
