@@ -65,17 +65,6 @@
     input[type="radio"], input[type="checkbox"] { margin-right: 0.5rem; }
     #submitBtn { width: 100%; margin-top: 1.2rem; }
 
-    #quote { font-style: italic; margin-bottom: 1rem; }
-    #triviaWrap {
-      margin-top: 1.5rem;
-      padding: 1rem 1.2rem;
-      background: #fafafa;
-      border: 1px dashed #ccc;
-      border-radius: 10px;
-    }
-    #triviaWrap.success { border-color: #53a653; background: #e9f8e9; }
-    #triviaWrap.fail { border-color: #d9534f; background: #ffecec; }
-
     .dish-img {
       width: 120px;
       border-radius: 10px;
@@ -114,22 +103,11 @@
     </section>
 
     <section id="orderPage" class="section hidden">
-      <p id="quote"></p>
-      <div id="triviaWrap">
-        <h3 style="font-family:'Playfair Display',serif;margin-bottom:.6rem">Answer this to continue:</h3>
-        <p id="triviaQ"></p>
-        <input id="triviaA" type="text" placeholder="Your answer" style="padding:.55rem;width:100%;max-width:280px;margin-top:.55rem" />
-        <button id="checkBtn" style="background:#ffbe76;color:#000;margin-top:.75rem">Check ✅</button>
-        <p id="triviaMsg" style="margin-top:.6rem"></p>
-      </div>
-
-      <form id="orderForm" class="hidden" action="thank-you.html" method="GET">
+      <form action="thank-you.html" method="GET">
         <fieldset>
           <legend>Main Dish</legend>
           <label><input type="radio" name="main" value="Cheesy Pasta Tteokbokki" required />Cheesy Pasta Tteokbokki</label>
-          <img src="https://images.unsplash.com/photo-1613145992429-942fc68a42e7?w=640&auto=format&q=70" class="dish-img" alt="Cheesy Tteokbokki" />
           <label><input type="radio" name="main" value="Makhni Tteokbokki" />Makhni Tteokbokki</label>
-          <img src="https://images.unsplash.com/photo-1634417124445-f0e3cf54218f?w=640&auto=format&q=70" class="dish-img" alt="Makhni Tteokbokki" />
         </fieldset>
 
         <fieldset>
@@ -139,10 +117,8 @@
 
         <fieldset>
           <legend>Dessert</legend>
-          <label><input type="radio" name="dessert" value="Mango Cheesecake" required />Mango Cheesecake</label>
-          <img src="https://images.unsplash.com/photo-1612197526444-e02ee8b32792?w=640&auto=format&q=70" class="dish-img" alt="Mango Cheesecake" />
-          <label><input type="radio" name="dessert" value="Chocolate Cheesecake" />Chocolate Cheesecake</label>
-          <img src="https://images.unsplash.com/photo-1612197672023-7d964bc59c80?w=640&auto=format&q=70" class="dish-img" alt="Chocolate Cheesecake" />
+          <label><input type="radio" name="dessert" value="Mango Cheesecake" required />Mango Cheesecake</label> 
+          <label><input type="radio" name="dessert" value="Chocolate Cheesecake" />Chocolate Cheesecake</label> 
         </fieldset>
 
         <button id="submitBtn" type="submit">Place Order ✨</button>
@@ -151,45 +127,6 @@
   </div>
 
   <script>
-    const quotes = [
-      '"Life is uncertain. Eat dessert first." – Ernestine Ulmer',
-      '"Food is symbolic of love when words are inadequate." – Alan D. Wolfelt',
-      '"First we eat, then we do everything else." – M.F.K. Fisher',
-      '"The secret ingredient is always cheese." – Anonymous'
-    ];
-
-    const triviaBank = [
-      { q: 'What colour do you get by mixing red and white?', a: 'pink' },
-      { q: 'What planet is known as the Red Planet?', a: 'mars' },
-      { q: '5 ✕ 4 equals?', a: '20' },
-      { q: 'How many days are there in a leap year?', a: '366' }
-    ];
-
-    const quoteEl = document.getElementById('quote');
-    const triviaQ = document.getElementById('triviaQ');
-    const triviaA = document.getElementById('triviaA');
-    const triviaMsg = document.getElementById('triviaMsg');
-    const orderForm = document.getElementById('orderForm');
-
-    const quote = quotes[Math.floor(Math.random() * quotes.length)];
-    quoteEl.textContent = quote;
-
-    const current = triviaBank[Math.floor(Math.random() * triviaBank.length)];
-    triviaQ.textContent = current.q;
-
-    document.getElementById('checkBtn').addEventListener('click', () => {
-      if (triviaA.value.trim().toLowerCase() === current.a) {
-        triviaMsg.textContent = 'Correct! You may now place your order.';
-        triviaMsg.style.color = 'green';
-        document.getElementById('triviaWrap').classList.add('success');
-        orderForm.classList.remove('hidden');
-      } else {
-        triviaMsg.textContent = 'Oops! That's not quite right. Try again.';
-        triviaMsg.style.color = 'red';
-        document.getElementById('triviaWrap').classList.add('fail');
-      }
-    });
-
     document.getElementById('startBtn').addEventListener('click', () => {
       document.getElementById('menuPage').classList.add('hidden');
       document.getElementById('orderPage').classList.remove('hidden');
