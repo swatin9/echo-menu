@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Echo Restaurant · Interactive Menu & Order</title>  <!-- Google Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">  <style>
+    /* ------------  Reset & Base  ------------- */
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Playfair Display',serif;background:#f7f5f3;min-height:100vh;color:#333;display:flex;align-items:center;justify-content:center;padding:2rem}
+    h1,h2,h3{font-family:'Great Vibes',cursive;font-weight:400}
+    button{cursor:pointer;border:none;border-radius:8px;padding:.9rem 1.4rem;font-size:1rem;font-family:'Playfair Display',serif;transition:background .2s}
+    button:hover{opacity:.9}
+    a{color:inherit;text-decoration:none}
+
+    /* ------------  Layout  ------------- */
+    .card{background:#fff;border-radius:18px;box-shadow:0 10px 20px rgba(0,0,0,.08);max-width:600px;width:100%;overflow:hidden}
+    .section{padding:2.5rem 2rem;text-align:center}
+    .hidden{display:none}
+
+    /* ------------  Hero / Menu page  ------------- */
+    .menu-hero{background:url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1050&q=60') center/cover;border-bottom:8px solid #f0e6d6;color:#fff;padding:4rem 2rem}
+    .menu-list{margin-top:2rem;text-align:left;font-size:1rem;line-height:1.55}
+    .menu-item{margin-bottom:1.5rem}
+    .menu-item h3{font-size:1.6rem;margin-bottom:.4rem;color:#222}
+    .menu-item p{font-size:.95rem;color:#555}
+
+    /* contrast on hero text */
+    .menu-hero h1{font-size:3.5rem;line-height:1.1;text-shadow:0 4px 10px rgba(0,0,0,.25)}
+
+    /* ------------  Order form styles  ------------- */
+    form{margin-top:1.2rem}
+    fieldset{border:none;text-align:left;margin-top:1.4rem}
+    legend{font-weight:700;margin-bottom:.6rem;font-size:1.15rem}
+    label{display:block;margin:.5rem 0;cursor:pointer}
+    input[type="radio"],input[type="checkbox"]{margin-right:.6rem}
+    #submitBtn{background:#1b8ce5;color:#fff;width:100%}
+    #submitBtn[disabled]{background:#b6c8d9;cursor:not-allowed}
+
+    /* Quote */
+    #quote{font-style:italic;margin-bottom:1rem}
+    #triviaWrap{margin-top:1.5rem;padding:1rem;border:1px dashed #ccc;border-radius:10px;background:#fafafa}
+    #triviaWrap.success{border-color:#53a653;background:#e9f8e9}
+    #triviaWrap.fail{border-color:#d9534f;background:#ffecec}
+  </style></head>
+<body>
+  <div class="card">
+    <!-- ================= Menu (Page 1) ================= -->
+    <section id="menuPage" class="section">
+      <div class="menu-hero">
+        <h1>Echo</h1>
+        <h2 style="letter-spacing:4px;margin-top:.5rem">MENU</h2>
+      </div>
+      <div class="menu-list">
+        <div class="menu-item">
+          <h3>Mango Cheesecake</h3>
+          <p>A velvety no‑bake cheesecake balanced with tropical mango, melting in your mouth.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Chocolate Cheesecake</h3>
+          <p>A rich, creamy explosion of chocolate bliss topped with luscious ganache.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Fried Tteokbokki with Pasta Sauce & Cheese</h3>
+          <p>Crispy rice cakes paired with a creamy, cheesy pasta sauce – a fusion for the soul.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Tteokbokki with Makhni Sauce</h3>
+          <p>Soft rice cakes swathed in rich makhni sauce for a comforting yet modern pairing.</p>
+        </div>
+      </div>
+      <button id="startBtn" style="background:#fe8a71;color:#fff;margin-top:2.2rem">Start Your Order →</button>
+    </section><!-- ================= Order (Page 2) ================= -->
+<section id="orderPage" class="section hidden">
+  <p id="quote"></p>
+
+  <!-- Trivia -->
+  <div id="triviaWrap">
+    <h3 style="font-family:'Playfair Display',serif;margin-bottom:.6rem">Answer this to continue:</h3>
+    <p id="triviaQ"></p>
+    <input id="triviaA" type="text" placeholder="Your answer" style="padding:.6rem;width:100%;max-width:300px;margin-top:.6rem"/>
+    <button id="checkBtn" style="background:#ffbe76;color:#000;margin-top:.8rem">Check ✅</button>
+    <p id="triviaMsg" style="margin-top:.6rem"></p>
+  </div>
+
+  <!-- Order form (disabled initially) -->
+  <form name="order" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html" id="orderForm" class="hidden">
+    <input type="hidden" name="form-name" value="order" />
+    <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+
+    <fieldset>
+      <legend>Main Dish</legend>
+      <label><input type="radio" name="mainDish" value="Cheesy Pasta Ttbekoi" required /> Cheesy Pasta Ttbekoi</label>
+      <label><input type="radio" name="mainDish" value="Makhni Ttbekoi" required /> Makhni Ttbekoi</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Add‑ons</legend>
+      <label><input type="checkbox" name="extraCheese" value="Yes" /> Extra Cheese</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Dessert</legend>
+      <label><input type="radio" name="dessert" value="Mango Cheesecake" required /> Mango Cheesecake</label>
+      <label><input type="radio" name="dessert" value="Chocolate Cheesecake" required /> Chocolate Cheesecake</label>
+    </fieldset>
+
+    <button id="submitBtn" type="submit">Place Order ✨</button>
+  </form>
+</section>
+
+  </div>  <script>
+    /* ---------------- Random Quotes & Trivia ---------------- */
+    const quotes=[
+      '"Food is symbolic of love when words are inadequate." – Alan D. Wolfelt',
+      '"Life is uncertain. Eat dessert first." – Ernestine Ulmer',
+      '"The secret ingredient is always cheese." – Unknown',
+      '"You don’t need a silver fork to eat good food." – Paul Prudhomme'
+    ];
+
+    const trivia=[
+      {q:'What is 7 + 6?',a:'13'},
+      {q:'Which planet is known as the Red Planet?',a:'Mars'},
+      {q:'What color do you get by mixing red and white?',a:'Pink'},
+      {q:'How many days are there in a leap year?',a:'366'},
+      {q:'What is 5 × 4?',a:'20'},
+      {q:'What gas do plants breathe in?',a:'Carbon dioxide'}
+    ];
+
+    // Elements
+    const menuPage=document.getElementById('menuPage');
+    const orderPage=document.getElementById('orderPage');
+    const startBtn=document.getElementById('startBtn');
+    const quoteEl=document.getElementById('quote');
+    const triviaWrap=document.getElementById('triviaWrap');
+    const triviaQ=document.getElementById('triviaQ');
+    const triviaA=document.getElementById('triviaA');
+    const checkBtn=document.getElementById('checkBtn');
+    const triviaMsg=document.getElementById('triviaMsg');
+    const orderForm=document.getElementById('orderForm');
+
+    // Pick random quote & trivia
+    const rand=(arr)=>arr[Math.floor(Math.random()*arr.length)];
+    let currentTrivia;
+
+    function loadTrivia(){
+      currentTrivia=rand(trivia);
+      triviaQ.textContent=currentTrivia.q;
+    }
+
+    startBtn.addEventListener('click',()=>{
+      menuPage.classList.add('hidden');
+      orderPage.classList.remove('hidden');
+      quoteEl.textContent=rand(quotes);
+      loadTrivia();
+    });
+
+    checkBtn.addEventListener('click',()=>{
+      const userAns=triviaA.value.trim().toLowerCase();
+      const correct=currentTrivia.a.toLowerCase();
+      if(userAns===correct){
+        triviaWrap.classList.remove('fail');
+        triviaWrap.classList.add('success');
+        triviaMsg.textContent='Great! You can order now ↓';
+        orderForm.classList.remove('hidden');
+        triviaA.disabled=true;
+        checkBtn.disabled=true;
+      }else{
+        triviaWrap.classList.remove('success');
+        triviaWrap.classList.add('fail');
+        triviaMsg.textContent='Oops! That’s not right. Try again.';
+      }
+    });
+  </script></body>
+</html>
